@@ -24,12 +24,22 @@ public abstract class ChessPiece {
     public ChessPiece(String color) {//конструктор
         this.color = color;
     }
+
     public abstract String getColor();//должен вернуть цвет фигуры;
+
     public abstract boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn);
+
     public abstract String getSymbol();//возвращает строку — тип фигуры.
 
-//    public boolean checkPos(int pos) {//проверка позиции
-//        return pos >= 0 && pos <= 7;
-//        //Также вы можете добавить и свои методы для удобства.
-//    }
+    public boolean checkPos(int pos) {//проверка позиции
+        return pos >= 0 && pos <= 7;
+        //Также вы можете добавить и свои методы для удобства.
+    }
+    public int getMax(int a, int b) {
+        return Math.max(a, b);
+    }
+
+    public int getMin(int a, int b) {
+        return Math.min(a, b);
+    }
 }

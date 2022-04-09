@@ -59,10 +59,10 @@ public class Horse extends ChessPiece {
         return "H";
     }
 
-    public boolean checkPos(int pos) {//проверка позиции
-        return pos >= 0 && pos <= 7;
-        //Также вы можете добавить и свои методы для удобства.
-    }
+//    public boolean checkPos(int pos) {//проверка позиции
+//        return pos >= 0 && pos <= 7;
+//        //Также вы можете добавить и свои методы для удобства.
+//    }
 }
 
 

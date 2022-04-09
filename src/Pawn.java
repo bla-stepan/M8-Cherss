@@ -68,8 +68,8 @@ public class Pawn extends ChessPiece {
         return "P";
     }
 
-    public boolean checkPos(int pos) {//проверка позиции
-        return pos >= 0 && pos <= 7;
-        //Также вы можете добавить и свои методы для удобства.
-    }
+//    public boolean checkPos(int pos) {//проверка позиции
+//        return pos >= 0 && pos <= 7;
+//        //Также вы можете добавить и свои методы для удобства.
+//    }
 }

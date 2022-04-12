@@ -79,4 +79,9 @@ public class Bishop extends ChessPiece {
     public String getSymbol() {
         return "B";
     }
+
+    @Override
+    public boolean checkPos(int pos) {
+        return super.checkPos(pos);
+    }
 }

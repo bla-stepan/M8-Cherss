@@ -4,8 +4,7 @@ public class King extends ChessPiece {
 В этих классах:
 Реализуйте конструктор, который будет принимать лишь цвет фигуры.
 Реализуйте метод getColor() так, чтобы он возвращал цвет фигуры.
-Реализуйте метод canMoveToPosition() так, чтобы фигуры не могли выйти за доску (доска в нашем случае — это двумерный массив размером 8 на 8,
-напоминаем, что индексы начинаются с 0) и могли ходить так, как ходят в шахматах (Королева ходит и по диагонали и по прямой,
+Реализуйте метод canMoveToPosition() так, чтобы фигуры не могли выйти за доску и могли ходить так, как ходят в шахматах (Королева ходит и по диагонали и по прямой,
 Король — в любое поле вокруг себя), также фигура не может сходить в точку, в которой она сейчас находится.
 Если фигура может пройти от точки (line, column) до точки (toLine, toColumn) по всем правилам (указанным выше),
 то функция вернет true, иначе — false.
@@ -25,18 +24,11 @@ public class King extends ChessPiece {
 
     @Override
     public boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
-        //проверяем есть ли координаты на достке
-        if (checkPos(line) && checkPos(toLine) && checkPos(column) && checkPos(toColumn)) {
-            //если пытаемся сходить дальше чем на 1 клетку
-            if (Math.abs(line - toLine) > 1 || Math.abs(column - toColumn) > 1) return false;
-            //если в конечной точке будет шах
-            if (isUnderAttack(chessBoard, toLine, toColumn)) return false;
-            //если клетка не пустая и там фигура другого цвета вернет истина
-            if (chessBoard.board[toLine][toColumn] != null) {
-                return !chessBoard.board[toLine][toColumn].getColor().equals(this.color);
-            }
-            return true;
-        } else return true;
+        if (toLine > 7 || toLine < 0 || toColumn > 7 || toColumn < 0) return false;
+        if (Math.abs(line - toLine) > 1 || Math.abs(column - toColumn) > 1) return false;
+        if (line == toLine && column == toColumn) return false;
+        if (isUnderAttack(chessBoard, toLine, toColumn)) return false;
+        return true;
     }
 
     @Override
@@ -46,22 +38,19 @@ public class King extends ChessPiece {
 
     public boolean isUnderAttack(ChessBoard chessBoard, int line, int column) {
         //проходим вообще по всем клеткам и проверяем
-        if (checkPos(line) && checkPos(column)) {
-            //перебираем координаты линий
-            for (int i = 0; i < 7; i++) {
-                //перебираем координаты столбцов
-                for (int j = 0; j < 7; j++) {
-                    //если клетка не пуста, т.е. на ней находится фигура
-                    if (chessBoard.board[i][j] != null) {
-                        //если фигура другого цвета и она может сходить на стартовую клетку короля то возвращаем истина
-                        if (!chessBoard.board[i][j].getColor().equals(color) && chessBoard.board[i][j].canMoveToPosition(chessBoard, i, j, line, column)) {
-                            return true;
-                        }
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+
+                if (chessBoard.board[i][j] != null) {//если клетка не пуста, т.е. на ней находится фигура
+                    //если фигура другого цвета и она может сходить на стартовую клетку короля то возвращаем истину
+                    if (!chessBoard.board[i][j].getColor().equals(color) && chessBoard.board[i][j].canMoveToPosition(chessBoard, i, j, line, column)) {
+                        return true;
                     }
                 }
             }
-            return false;
-        } else return false;
+        }
+        return false;
     }
 }
+
 

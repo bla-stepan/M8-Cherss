@@ -33,13 +33,5 @@ public abstract class ChessPiece {
 
     public boolean checkPos(int pos) {//проверка позиции
         return pos >= 0 && pos <= 7;
-        //Также вы можете добавить и свои методы для удобства.
-    }
-    public int getMax(int a, int b) {
-        return Math.max(a, b);
-    }
-
-    public int getMin(int a, int b) {
-        return Math.min(a, b);
     }
 }

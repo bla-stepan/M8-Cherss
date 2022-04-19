@@ -48,7 +48,7 @@ public class Pawn extends ChessPiece {
                 //если конечная клетка свободна и на пути нет фигур, функция вернет истина
                 return chessBoard.board[toLine][toColumn] == null && chessBoard.board[line + dir][column] == null;
             }
-            if ((column - toColumn == 1 || column - toColumn == -1) && (line - toLine == 1 || line - toLine == -1)
+            if ((line - toLine == 1 || line - toLine == -1)
                     //и на этой клетке есть фигура
                     && chessBoard.board[toLine][toColumn] != null) {
                 //возвращаем ложь или истина по результатам проверки является ли фигура в конечной клетке другого цвета

@@ -28,7 +28,9 @@ public class Horse extends ChessPiece {
         //все кординаты существуют
         if (toLine<0 || toLine>7 || toColumn<0 || toColumn>7) return false;
         if (toLine==line && column==toColumn) return false;
-        return  (Math.abs(toLine-line)==1 && Math.abs(column-toColumn)==2 || Math.abs(toLine-line)==2 && Math.abs(toColumn-column)==1);
+        return (Math.abs(toLine-line)==1 && Math.abs(column-toColumn)==2 || Math.abs(toLine-line)==2 && Math.abs(toColumn-column)==1) &&
+                (chessBoard.board[toLine][toColumn]==null || !chessBoard.board[toLine][toColumn].color.equals(this.color));
+
 //        if (toColumn>=0 && toColumn<=7 && toLine>=0 && toLine<=7) {
 //            //стартовая координата не равна конечной
 //            if (line != toLine && column != toColumn &&

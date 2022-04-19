@@ -28,7 +28,7 @@ public class King extends ChessPiece {
         if (Math.abs(line - toLine) > 1 || Math.abs(column - toColumn) > 1) return false;
         if (line == toLine && column == toColumn) return false;
         if (isUnderAttack(chessBoard, toLine, toColumn)) return false;
-        return true;
+        return chessBoard.board[toLine][toColumn]==null || !chessBoard.board[toLine][toColumn].color.equals(this.color);
     }
 
     @Override

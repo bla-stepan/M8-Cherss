@@ -26,9 +26,20 @@ public class Bishop extends ChessPiece {
         if (toLine > 7 || toLine < 0 || toColumn > 7 || toColumn < 0) return false;//если конечная клетка за пределами поля
         if (Math.abs(line - toLine) == 0) return false;//если линиии совпадают то нельзя ходить т.к. ходит только наискосок
         if (Math.abs(line - toLine) != Math.abs(column - toColumn)) return false;//нельзя ходить не наискосок
-        return  (line != toLine && column != toColumn);//нельзя ходить на стартовую клетку
-        //return true;
+        if (line == toLine && column == toColumn) {
+            return false;//нельзя ходить на стартовую клетку
+            //return  (line != toLine && column != toColumn);//нельзя ходить на стартовую клетку
+            //return true
+        }else {
+            for (int i = Math.min(line, toLine); i < Math.max(line, toLine); i++) {
+                for (int j = Math.min(column, toColumn); j < Math.max(column, toColumn); j++) {
+                    return chessBoard.board[i][j] == null || !chessBoard.board[i][j].getColor().equals(this.color);
+                }
+            }
+        }
+        return false;
     }
+
 
     @Override
     public String getSymbol() {

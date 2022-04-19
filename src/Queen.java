@@ -26,8 +26,49 @@ public class Queen extends ChessPiece {
     public boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
         if (toLine > 7 || toLine < 0 || toColumn > 7 || toColumn < 0) return false;//если конечная клетка за пределами поля
         if (line==toLine && column==toColumn) return false;
-        return line == toLine  || column == toColumn || Math.abs(line-toLine) == Math.abs(column-toColumn);
-        //y == Y && x != X || y != Y && x == X || (x - y) == (X - Y) || (x + y) == (X + Y);
+        if (line == toLine  || column == toColumn || Math.abs(line-toLine) == Math.abs(column-toColumn)) {
+            if (line==toLine && column>toColumn){
+                for (int i = 0; i < Math.abs(line-toLine); i++) {
+                    return chessBoard.board[toLine][column-i]==null || !chessBoard.board[toLine][column-i].getColor().equals(this.color);
+                }
+            }
+            else if (line==toLine && column<toColumn){
+                for (int i = 0; i < Math.abs(line-toLine); i++) {
+                    return chessBoard.board[toLine][column+i]==null || !chessBoard.board[toLine][column+i].getColor().equals(this.color);
+                }
+            }
+            else if (line>toLine && column==toColumn){
+                for (int i = 0; i < Math.abs(column-toColumn); i++) {
+                    return chessBoard.board[line-i][toColumn]== null || !chessBoard.board[line-i][toColumn].getColor().equals(this.color);
+                }
+            }
+            else if (line<toLine && column==toColumn){
+                for (int i = 0; i < Math.abs(column-toColumn); i++) {
+                    return chessBoard.board[line+i][toColumn]== null || !chessBoard.board[line+i][toColumn].getColor().equals(this.color);
+                }
+            }
+            else if (line>toLine && column>toColumn){
+                for (int i = 0; i < Math.abs(line-toLine); i++) {
+                        return chessBoard.board[line-i][column-i]==null || chessBoard.board[line-i][column-i].getColor().equals(this.color);
+                }
+            }
+            else if (line<toLine && column<toColumn){
+                for (int i = 0; i < Math.abs(line-toLine); i++) {
+                    return chessBoard.board[line+i][column+i]==null || chessBoard.board[line+i][column+i].getColor().equals(this.color);
+                }
+            }
+            else if (line>toLine && column<toColumn){
+                for (int i = 0; i < Math.abs(line-toLine); i++) {
+                    return chessBoard.board[line+i][column-i]==null || chessBoard.board[line+i][column-i].getColor().equals(this.color);
+                }
+            }
+            else {//(line<toLine && column>toColumn)
+                for (int i = 0; i < Math.abs(line-toLine); i++) {
+                    return chessBoard.board[line-i][column+i]==null || chessBoard.board[line-i][column+i].getColor().equals(this.color);
+                }
+            }
+        }
+        return false;//y == Y && x != X || y != Y && x == X || (x - y) == (X - Y) || (x + y) == (X + Y);
     }
 
     @Override

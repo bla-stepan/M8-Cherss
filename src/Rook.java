@@ -22,10 +22,34 @@ public class Rook extends ChessPiece {
     @Override
     public boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
         //проверяем, что такие клетки существуют на доске
-        if (toLine>7 || toLine<0 || toColumn>7 || toColumn<0) return false;//за пределами доски
-        if (line==toLine && column==toColumn) return false;//нельзя ходить не прямо
-        return  line-toLine==0 || column-toColumn==0;//нельзя ходить на стартовую клетку
-
+        if (toLine > 7 || toLine < 0 || toColumn > 7 || toColumn < 0) return false;//за пределами доски
+        if (line == toLine && column == toColumn) return false;//нельзя ходить не прямо
+        if (line - toLine == 0 || column - toColumn == 0) {
+            return false;//нельзя ходить на стартовую клетку
+        } else {
+            if (line==toLine){
+                if (column>toColumn){
+                    for (int i = 0; i < Math.abs(line-toLine); i++) {
+                        return chessBoard.board[toLine][column-i]==null || !chessBoard.board[toLine][column-i].getColor().equals(this.color);
+                    }
+                } else {
+                    for (int i = 0; i < Math.abs(line-toLine); i++) {
+                        return chessBoard.board[toLine][column+i]==null || !chessBoard.board[toLine][column+i].getColor().equals(this.color);
+                    }
+                }
+            } else{
+                if (line>toLine){
+                    for (int i = 0; i < Math.abs(column-toColumn); i++) {
+                        return chessBoard.board[line-i][toColumn]== null || !chessBoard.board[line-i][toColumn].getColor().equals(this.color);
+                    }
+                } else{
+                    for (int i = 0; i < Math.abs(column-toColumn); i++) {
+                        return chessBoard.board[line+i][toColumn]== null || !chessBoard.board[line+i][toColumn].getColor().equals(this.color);
+                    }
+                }
+            }
+        }
+        return false;
 //        if (checkPos(line) && checkPos(column) && checkPos(toLine) && checkPos(toColumn)) {
 //            //если ходим по вертикали (по колонке)
 //            if (column == toColumn) {

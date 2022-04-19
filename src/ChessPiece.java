@@ -30,8 +30,4 @@ public abstract class ChessPiece {
     public abstract boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn);
 
     public abstract String getSymbol();//возвращает строку — тип фигуры.
-
-    public boolean checkPos(int pos) {//проверка позиции
-        return pos >= 0 && pos <= 7;
-    }
 }
